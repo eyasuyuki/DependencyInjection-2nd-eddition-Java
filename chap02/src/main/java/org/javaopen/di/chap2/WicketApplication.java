@@ -28,7 +28,7 @@ import org.javaopen.di.chap2.ui.LoginPage;
 import javax.management.MBeanServer;
 import java.lang.management.ManagementFactory;
 
-public class WebApp extends AuthenticatedWebApplication {
+public class WicketApplication extends AuthenticatedWebApplication {
 
     private static Server server;
 
