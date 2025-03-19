@@ -5,11 +5,11 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.javaopen.di.chap2</groupId>
-	<artifactId>RightCommerce</artifactId>
+	<artifactId>RightECommerce</artifactId>
 	<packaging>war</packaging>
 	<version>1.0-SNAPSHOT</version>
 
-	<name>Rightommerce</name>
+	<name>RightECommerce</name>
 	<description></description>
 	<!--
 		<organization>

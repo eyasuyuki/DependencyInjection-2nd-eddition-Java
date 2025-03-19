@@ -8,8 +8,12 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.WebPage;
 import org.javaopen.di.chap3.data.Product;
 import org.javaopen.di.chap3.domain.ProductService;
+import org.javaopen.di.chap3.ui.model.FeaturedProductsViewModel;
+import org.javaopen.di.chap3.ui.model.ProductViewModel;
 
+import java.awt.*;
 import java.io.Serial;
+import java.util.Arrays;
 import java.util.List;
 
 public class HomePage extends WebPage {
@@ -19,18 +23,19 @@ public class HomePage extends WebPage {
 	public HomePage(final PageParameters parameters) {
 		super(parameters);
 
-		add(new Label("version", getApplication().getFrameworkSettings().getVersion()));
-
 		final boolean isFeatured = AuthSession.get().getRoles().hasRole("preferredCustomer");
 
-		final ProductService service = new ProductService();
-		final List<Product> products = service.getFeaturedProducts(isFeatured);
-		final ListModel<Product> model = new ListModel<>(products);
+//		final ProductService service = new ProductService();
+//		final List<Product> products = service.getFeaturedProducts(isFeatured);
+		final FeaturedProductsViewModel vm = new FeaturedProductsViewModel(Arrays.asList(
+			new ProductViewModel("Chocolate", 34.95),
+			new ProductViewModel("Asparagus", 39.80)
+		));
+		final ListModel<ProductViewModel> model = new ListModel<>(vm.getProducts());
 		add(new ListView<>("products", model) {
 			@Override
-			protected void populateItem(ListItem<Product> item) {
-				item.add(new Label("name", item.getModelObject().getName()));
-				item.add(new Label("price", item.getModelObject().getUnitPrice()));
+			protected void populateItem(ListItem<ProductViewModel> item) {
+				item.add(new Label("summaryText", item.getModelObject().getSummaryText()));
 			}
 		});
 	}
