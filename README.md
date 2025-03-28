@@ -19,6 +19,12 @@ mvn jetty:run
 
 ※ 停止は```Ctrl-C```
 
+
+|ID | パスワード | ロール|
+----|------------|--------
+|user|password|なし|
+|premier|password|preferredCustomer|
+
 # 第3章 疎結合なコードへの変換
 
 ```shell
