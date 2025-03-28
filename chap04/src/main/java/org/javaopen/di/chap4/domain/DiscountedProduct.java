@@ -1,0 +1,19 @@
+package org.javaopen.di.chap4.domain;
+
+public class DiscountedProduct {
+    private String name;
+    private double unitPrice;
+
+    public DiscountedProduct(String name, double unitPrice) {
+        this.name = name;
+        this.unitPrice = unitPrice;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getUnitPrice() {
+        return unitPrice;
+    }
+}

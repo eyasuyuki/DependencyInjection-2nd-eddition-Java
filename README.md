@@ -3,6 +3,10 @@ Javaで書いた『DIの原理・原則とパターン』サンプルプログ�
 
 書籍『DIの原理・原則とパターン』ISBN978-4-8399-8306-2 のサンプルプログラム[https://github.com/DependencyInjection-2nd-edition/codesamples](https://github.com/DependencyInjection-2nd-edition/codesamples)はC#で書かれているが、理解のためにJavaで書き直してみる。
 
+特定のフレームワークに依存するのを避けたが、WebアプリケーションではApache Wicketを使用している。
+
+https://wicket.apache.org
+
 # 第1章 依存注入(Dependency Injection)の役割
 
 ```shell
@@ -19,7 +23,6 @@ mvn jetty:run
 
 ※ 停止は```Ctrl-C```
 
-
 |ID | パスワード | ロール|
 ----|------------|--------
 |user|password|なし|
@@ -33,3 +36,12 @@ mvn jetty:run
 ```
 
 ※ 停止は```Ctrl-C```
+
+# 第4章 依存注入のパターン
+```shell
+cd chap04
+mvn jetty:run
+```
+
+※ 停止は```Ctrl-C```
+

@@ -1,4 +1,4 @@
-package org.javaopen.di.chap3;
+package org.javaopen.di.chap4;
 
 import org.apache.wicket.Component;
 import org.apache.wicket.IPageFactory;
@@ -22,10 +22,10 @@ import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.eclipse.jetty.websocket.jakarta.server.config.JakartaWebSocketServletContainerInitializer;
-import org.javaopen.di.chap3.ui.StartupPageFactory;
-import org.javaopen.di.chap3.ui.page.HomePage;
-import org.javaopen.di.chap3.ui.page.LoginPage;
-import org.javaopen.di.chap3.ui.security.AuthSession;
+import org.javaopen.di.chap4.ui.StartupPageFactory;
+import org.javaopen.di.chap4.ui.page.HomePage;
+import org.javaopen.di.chap4.ui.page.LoginPage;
+import org.javaopen.di.chap4.ui.security.AuthSession;
 
 import javax.management.MBeanServer;
 import java.lang.management.ManagementFactory;

@@ -1,0 +1,74 @@
+@startuml
+left to right direction
+skinparam linetype ortho
+title Class diagram
+class WicketApplication {
+    #init()
+    +getHomePage()
+    +getSignInPageClass()
+    +getWebSessionClass()
+    {static} +initServec()
+    {static} +main()
+}
+package domain {
+    enum Role {
+        +PREFERRED_CUSTOMER
+    }
+
+    class Product {
+        -String name
+        -Double unitPrice
+        -Boolean isFeatured
+    }
+
+    class ProductService
+
+    interface IUserContext  <<interface>> {
+        +isInRole(Role)
+    }
+
+    interface IProductService <<interface>> {
+        +getFeaturedProducts()
+    }
+
+    interface IProductRepository <<interface>> {
+        {method} +getFeaturedProducts()
+    }
+
+    class DiscountedProduct {
+        -String name
+        -Double unitPrice
+    }
+}
+
+package data {
+    class CommerceDao
+    class SqlProductRepository
+}
+
+package ui {
+
+    package model {
+        class FeaturedProductsViewModel
+        class ProductViewModel {
+            +getSummaryText()
+        }
+    }
+
+    package page {
+        class HomePage
+        class LoginPage
+    }
+
+    class WebSessionUserContext
+
+    class AuthSession
+}
+
+IUserContext <|-- WebSessionUserContext
+IProductService <|-- ProductService
+ProductService o-- DiscountedProduct
+IProductRepository <|-- SqlProductRepository
+SqlProductRepository o-- Product
+
+@enduml

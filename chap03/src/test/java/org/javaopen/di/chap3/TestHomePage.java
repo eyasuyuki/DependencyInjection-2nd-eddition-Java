@@ -1,7 +1,7 @@
 package org.javaopen.di.chap3;
 
 import org.apache.wicket.util.tester.WicketTester;
-import org.javaopen.di.chap3.ui.HomePage;
+import org.javaopen.di.chap3.ui.page.HomePage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
