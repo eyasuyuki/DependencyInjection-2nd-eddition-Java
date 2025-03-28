@@ -1,4 +1,4 @@
-package org.javaopen.di.chap3.ui;
+package org.javaopen.di.chap3.ui.security;
 
 import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
 import org.apache.wicket.authroles.authorization.strategies.role.Roles;

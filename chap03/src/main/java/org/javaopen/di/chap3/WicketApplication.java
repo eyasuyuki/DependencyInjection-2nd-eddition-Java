@@ -1,6 +1,7 @@
 package org.javaopen.di.chap3;
 
 import org.apache.wicket.Component;
+import org.apache.wicket.IPageFactory;
 import org.apache.wicket.Page;
 import org.apache.wicket.Session;
 import org.apache.wicket.authorization.Action;
@@ -21,9 +22,17 @@ import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.eclipse.jetty.websocket.jakarta.server.config.JakartaWebSocketServletContainerInitializer;
-import org.javaopen.di.chap3.ui.AuthSession;
-import org.javaopen.di.chap3.ui.HomePage;
-import org.javaopen.di.chap3.ui.LoginPage;
+import org.javaopen.di.chap3.data.CommerceDao;
+import org.javaopen.di.chap3.data.SqlProductRepository;
+import org.javaopen.di.chap3.domain.IProductRepository;
+import org.javaopen.di.chap3.domain.IProductService;
+import org.javaopen.di.chap3.domain.IUserContext;
+import org.javaopen.di.chap3.domain.ProductService;
+import org.javaopen.di.chap3.ui.security.AuthSession;
+import org.javaopen.di.chap3.ui.StartupPageFactory;
+import org.javaopen.di.chap3.ui.security.WebSessionUserContext;
+import org.javaopen.di.chap3.ui.page.HomePage;
+import org.javaopen.di.chap3.ui.page.LoginPage;
 
 import javax.management.MBeanServer;
 import java.lang.management.ManagementFactory;
@@ -32,41 +41,12 @@ public class WicketApplication extends AuthenticatedWebApplication {
 
 	private static Server server;
 
-	public static void initServer() throws Exception {
-		System.setProperty("wicket.configuration", "development");
-
-		server = new Server();
-		HttpConfiguration httpConfig = new HttpConfiguration();
-		httpConfig.setOutputBufferSize(32768);
-
-		ServerConnector http = new ServerConnector(server, new HttpConnectionFactory(httpConfig));
-		http.setPort(8080);
-		http.setIdleTimeout(1000 * 60 * 60);
-		server.addConnector(http);
-
-		WebAppContext webAppContext = new WebAppContext();
-		webAppContext.setServer(server);
-		webAppContext.setContextPath("/");
-		webAppContext.setWar("src/main/webapp");
-
-		ServletContextHandler contextHandler =
-				ServletContextHandler.getServletContextHandler(webAppContext.getServletContext());
-		JakartaWebSocketServletContainerInitializer.configure(
-				contextHandler,
-				(servletContext, container) -> container.addEndpoint(new WicketServerEndpointConfig())
-		);
-
-		server.setHandler(webAppContext);
-
-		MBeanServer mBeanServer = ManagementFactory.getPlatformMBeanServer();
-		MBeanContainer mBeanContainer = new MBeanContainer(mBeanServer);
-		server.addEventListener(mBeanContainer);
-		server.addBean(mBeanContainer);
-	}
+	private IPageFactory pageFactory;
 
 	@Override
 	protected void init() {
 		super.init();
+
 		getSecuritySettings().setAuthorizationStrategy(new IAuthorizationStrategy() {
 			@Override
 			public <T extends IRequestableComponent> boolean isInstantiationAuthorized(Class<T> aClass) {
@@ -91,12 +71,56 @@ public class WicketApplication extends AuthenticatedWebApplication {
 				return session != null && session.isSignedIn();
 			}
 		});
+
 		mountPackage("/login", LoginPage.class);
+	}
+
+	/**
+	 * 合成起点(Composition root)
+	 * @return ページファクトリー
+	 */
+	@Override
+	protected IPageFactory newPageFactory() {
+		if (pageFactory == null) {
+			pageFactory = new StartupPageFactory();
+		}
+		return pageFactory;
 	}
 
 	public static void main(String[] args) {
 		try {
-			initServer();
+			// init server
+			System.setProperty("wicket.configuration", "development");
+
+			server = new Server();
+			HttpConfiguration httpConfig = new HttpConfiguration();
+			httpConfig.setOutputBufferSize(32768);
+
+			ServerConnector http = new ServerConnector(server, new HttpConnectionFactory(httpConfig));
+			http.setPort(8080);
+			http.setIdleTimeout(1000 * 60 * 60);
+			server.addConnector(http);
+
+			WebAppContext webAppContext = new WebAppContext();
+			webAppContext.setServer(server);
+			webAppContext.setContextPath("/");
+			webAppContext.setWar("src/main/webapp");
+
+			ServletContextHandler contextHandler =
+					ServletContextHandler.getServletContextHandler(webAppContext.getServletContext());
+			JakartaWebSocketServletContainerInitializer.configure(
+					contextHandler,
+					(servletContext, container) -> container.addEndpoint(new WicketServerEndpointConfig())
+			);
+
+			server.setHandler(webAppContext);
+
+			MBeanServer mBeanServer = ManagementFactory.getPlatformMBeanServer();
+			MBeanContainer mBeanContainer = new MBeanContainer(mBeanServer);
+			server.addEventListener(mBeanContainer);
+			server.addBean(mBeanContainer);
+
+			// server start
 			server.start();
 			server.join();
 		} catch (Exception e) {
@@ -113,7 +137,7 @@ public class WicketApplication extends AuthenticatedWebApplication {
 	@Override
 	public Class<? extends Page> getHomePage() {
 		return HomePage.class;
-	}
+	}                               
 
 	@Override
 	protected Class<? extends WebPage> getSignInPageClass() {

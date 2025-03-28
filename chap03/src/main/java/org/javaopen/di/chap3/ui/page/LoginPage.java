@@ -1,10 +1,11 @@
-package org.javaopen.di.chap3.ui;
+package org.javaopen.di.chap3.ui.page;
 
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.PropertyModel;
+import org.javaopen.di.chap3.ui.security.AuthSession;
 
 public class LoginPage extends WebPage {
     private String username;
