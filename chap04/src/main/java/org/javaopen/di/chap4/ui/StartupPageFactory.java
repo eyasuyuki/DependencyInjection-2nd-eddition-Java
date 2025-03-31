@@ -1,13 +1,18 @@
 package org.javaopen.di.chap4.ui;
 
 import org.apache.wicket.IPageFactory;
+import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.request.component.IRequestablePage;
+import org.apache.wicket.request.cycle.RequestCycle;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.javaopen.di.chap4.data.CommerceDao;
 import org.javaopen.di.chap4.data.SqlProductRepository;
+import org.javaopen.di.chap4.domain.FixedCurrencyConverter;
+import org.javaopen.di.chap4.domain.ICurrencyConverter;
 import org.javaopen.di.chap4.domain.IProductRepository;
 import org.javaopen.di.chap4.domain.IProductService;
 import org.javaopen.di.chap4.domain.IUserContext;
+import org.javaopen.di.chap4.domain.Money;
 import org.javaopen.di.chap4.domain.ProductService;
 import org.javaopen.di.chap4.ui.page.HomePage;
 import org.javaopen.di.chap4.ui.page.LoginPage;
@@ -16,6 +21,8 @@ import org.javaopen.di.chap4.ui.security.WebSessionUserContext;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import java.util.Currency;
+import java.util.Locale;
 
 /**
  * 合成起点(Composition root)
@@ -25,14 +32,17 @@ import javax.naming.NamingException;
 public class StartupPageFactory implements IPageFactory {
     private IUserContext userContext;
     private IProductRepository productRepository;
+    private ICurrencyConverter currencyConverter;
     private IProductService productService;
 
     public StartupPageFactory() {
         userContext = new WebSessionUserContext();
         // product repository
         productRepository = new SqlProductRepository(new CommerceDao(getJdbcUrl()));
+        // currency converter
+        currencyConverter = new FixedCurrencyConverter();
         // product service
-        productService = new ProductService(productRepository, userContext);
+        productService = new ProductService(productRepository, userContext, currencyConverter);
     }
 
     @Override

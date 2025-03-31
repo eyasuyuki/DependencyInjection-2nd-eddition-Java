@@ -1,20 +1,39 @@
 package org.javaopen.di.chap4.domain;
 
+import java.util.Currency;
+
 public class Product {
     private String name;
-    private Double unitPrice;
+    private Money unitPrice;
     private Boolean isFeatured;
 
-    public Product(String name, Double unitPrice, Boolean isFeatured) {
+    public Product(String name, Money unitPrice, Boolean isFeatured) {
         this.name = name;
         this.unitPrice = unitPrice;
         this.isFeatured = isFeatured;
     }
 
+    public Product convertTo(Currency currency, ICurrencyConverter converter) {
+        if (currency == null) {
+            throw new IllegalArgumentException("Currency cannot be null");
+        }
+        if (converter == null) {
+            throw new IllegalArgumentException("Converter cannot be null");
+        }
+        Money newPrice = converter.exchange(unitPrice, currency);
+
+        return withUnitPrice(newPrice);
+    }
+
+    public Product withUnitPrice(Money newPrice) {
+        return new Product(name, newPrice, isFeatured);
+    }
+
     public DiscountedProduct applyDiscountFor(IUserContext user) {
         boolean preferred = user.isInRole(Role.PREFERRED_CUSTOMER);
         double discount = preferred ? 0.95 : 1.0;
-        return new DiscountedProduct(name, unitPrice * discount);
+        Money newPrice = new Money(unitPrice.getAmount() * discount, unitPrice.getCurrency());
+        return new DiscountedProduct(name, newPrice);
     }
 
     public String getName() {
@@ -25,11 +44,11 @@ public class Product {
         this.name = name;
     }
 
-    public Double getUnitPrice() {
+    public Money getUnitPrice() {
         return unitPrice;
     }
 
-    public void setUnitPrice(Double unitPrice) {
+    public void setUnitPrice(Money unitPrice) {
         this.unitPrice = unitPrice;
     }
 

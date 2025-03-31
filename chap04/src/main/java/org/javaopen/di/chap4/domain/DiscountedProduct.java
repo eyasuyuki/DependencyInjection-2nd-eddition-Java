@@ -2,9 +2,9 @@ package org.javaopen.di.chap4.domain;
 
 public class DiscountedProduct {
     private String name;
-    private double unitPrice;
+    private Money unitPrice;
 
-    public DiscountedProduct(String name, double unitPrice) {
+    public DiscountedProduct(String name, Money unitPrice) {
         this.name = name;
         this.unitPrice = unitPrice;
     }
@@ -13,7 +13,7 @@ public class DiscountedProduct {
         return name;
     }
 
-    public double getUnitPrice() {
+    public Money getUnitPrice() {
         return unitPrice;
     }
 }
