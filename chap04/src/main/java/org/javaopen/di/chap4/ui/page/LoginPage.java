@@ -5,11 +5,7 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.PropertyModel;
-import org.apache.wicket.request.cycle.RequestCycle;
 import org.javaopen.di.chap4.ui.security.AuthSession;
-
-import java.util.Currency;
-import java.util.Locale;
 
 public class LoginPage extends WebPage {
     private String username;

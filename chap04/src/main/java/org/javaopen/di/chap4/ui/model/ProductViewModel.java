@@ -4,15 +4,10 @@ import org.javaopen.di.chap4.domain.Money;
 
 import java.io.Serializable;
 import java.text.NumberFormat;
-import java.util.Arrays;
 import java.util.Currency;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class ProductViewModel implements Serializable {
     private static final long serialVersionUID = 1L;
