@@ -11,6 +11,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * リスト 2.2
+ */
 public class CommerceDao {
     private String getJdbcUrl() {
         try {

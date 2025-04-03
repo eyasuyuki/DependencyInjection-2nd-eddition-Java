@@ -1,5 +1,8 @@
 package org.javaopen.di.chap3.domain;
 
+/**
+ * リスト 3.6
+ */
 public class DiscountedProduct {
     private String name;
     private double unitPrice;

@@ -4,6 +4,9 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.security.Principal;
 
+/**
+ * リスト 1.3
+ */
 public class SecureMessageWriter implements IMessageWriter {
     private Principal principal = null;
     private IMessageWriter writer = null;

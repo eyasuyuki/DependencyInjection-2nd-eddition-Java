@@ -6,6 +6,9 @@ import org.javaopen.di.chap2.data.Product;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * リスト 2.3
+ */
 public class ProductService {
     private final CommerceDao dao;
     public ProductService() {

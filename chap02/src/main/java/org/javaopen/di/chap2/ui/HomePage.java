@@ -12,6 +12,9 @@ import org.javaopen.di.chap2.domain.ProductService;
 import java.io.Serial;
 import java.util.List;
 
+/**
+ * リスト 2.4
+ */
 public class HomePage extends WebPage {
 	@Serial
 	private static final long serialVersionUID = 1L;

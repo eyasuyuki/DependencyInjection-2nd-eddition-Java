@@ -10,9 +10,15 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CommerceDao {
+/**
+ * リスト 3.11
+ */
+ public class CommerceDao {
     private final String connectionString;
     public CommerceDao(String connectionString) {
+        if (connectionString == null || connectionString.isEmpty()) {
+            throw new IllegalArgumentException("connectionString is null or empty");
+        }
         this.connectionString = connectionString;
     }
 

@@ -1,5 +1,8 @@
 package org.javaopen.di.chap1;
 
+/**
+ * リスト 1.1
+ */
 public class Salutation {
     private IMessageWriter writer;
     public Salutation(IMessageWriter writer) {

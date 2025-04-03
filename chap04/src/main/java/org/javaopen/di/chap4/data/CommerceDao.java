@@ -13,7 +13,10 @@ import java.util.Currency;
 import java.util.List;
 import java.util.Locale;
 
-public class CommerceDao {
+/**
+ * リスト 3.11
+ */
+ public class CommerceDao {
     private static final Currency defaultCurrenty = Currency.getInstance(Locale.US);
     private final String connectionString;
     public CommerceDao(String connectionString) {

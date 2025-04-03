@@ -10,6 +10,9 @@ import java.util.Arrays;
 import java.util.Currency;
 import java.util.Locale;
 
+/**
+ * リスト 3.12
+ */
 public class WebSessionUserContext implements IUserContext {
     @Override
     public boolean isInRole(Role role) {

@@ -20,6 +20,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 /**
+ * リスト 4.3
  * 合成起点(Composition root)
  * 元のStartupに相当するクラス
  * HomePageに対してコンストラクタインジェクションを行う

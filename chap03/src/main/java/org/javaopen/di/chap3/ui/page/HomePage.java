@@ -15,6 +15,9 @@ import java.io.Serial;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * リスト 3.4
+ */
 public class HomePage extends WebPage {
 	@Serial
 	private static final long serialVersionUID = 1L;

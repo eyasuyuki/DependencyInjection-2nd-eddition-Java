@@ -6,6 +6,7 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
+ * リスト 4.8
  * 固定レートで貨幣変換をするダミーのクラス
  * java.util.Localeに定義された国しか変換しない
  */

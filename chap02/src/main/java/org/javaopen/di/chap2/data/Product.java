@@ -1,5 +1,8 @@
 package org.javaopen.di.chap2.data;
 
+/**
+ * リスト 2.1
+ */
 public class Product {
     private String id;
     private String name;

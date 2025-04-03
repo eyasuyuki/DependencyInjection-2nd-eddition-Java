@@ -13,6 +13,12 @@ public class Product {
         this.isFeatured = isFeatured;
     }
 
+    /**
+     * リスト 4.15
+     * @param currency 通貨
+     * @param converter 貨幣変換機
+     * @return 通貨換算後のProductオブジェクト
+     */
     public Product convertTo(Currency currency, ICurrencyConverter converter) {
         if (currency == null) {
             throw new IllegalArgumentException("Currency cannot be null");

@@ -6,6 +6,9 @@ import org.javaopen.di.chap3.domain.Product;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * リスト 3.10
+ */
 public class SqlProductRepository implements IProductRepository {
     private CommerceDao dao;
 

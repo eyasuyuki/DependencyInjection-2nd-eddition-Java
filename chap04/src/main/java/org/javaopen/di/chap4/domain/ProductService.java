@@ -4,6 +4,9 @@ import java.util.Currency;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * リスト 4.7
+ */
 public class ProductService implements IProductService {
     private final IProductRepository repository;
     private final IUserContext userContext;
@@ -26,6 +29,10 @@ public class ProductService implements IProductService {
         this.converter = converter;
     }
 
+    /**
+     * リスト 4.16
+     * @return 通貨換算されディスカウントされた製品のリスト
+     */
     public List<DiscountedProduct> getFeaturedProducts() {
         Currency userCurrency = userContext.getCurrency();
         return repository.getFeaturedProducts().stream()

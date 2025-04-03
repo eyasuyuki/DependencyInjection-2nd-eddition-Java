@@ -3,6 +3,9 @@ package org.javaopen.di.chap3.domain;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * リスト 3.9
+ */
 public class ProductService implements IProductService {
     private final IProductRepository repository;
     private final IUserContext userContext;
