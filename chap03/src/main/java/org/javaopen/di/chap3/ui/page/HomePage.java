@@ -1,5 +1,6 @@
 package org.javaopen.di.chap3.ui.page;
 
+import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.model.util.ListModel;
@@ -7,6 +8,7 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.WebPage;
 import org.javaopen.di.chap3.domain.DiscountedProduct;
 import org.javaopen.di.chap3.domain.IProductService;
+import org.javaopen.di.chap3.domain.Role;
 import org.javaopen.di.chap3.ui.security.AuthSession;
 import org.javaopen.di.chap3.ui.model.FeaturedProductsViewModel;
 import org.javaopen.di.chap3.ui.model.ProductViewModel;
@@ -29,6 +31,13 @@ public class HomePage extends WebPage {
 			throw new IllegalStateException("productService is null");
 		}
 
+		this.productService = productService;
+
+		buildPage();
+	}
+
+	protected void buildPage() {
+
 		List<DiscountedProduct> products = productService.getFeaturedProducts();
 
 		FeaturedProductsViewModel vm = new FeaturedProductsViewModel(
@@ -36,7 +45,7 @@ public class HomePage extends WebPage {
 			.map(x -> new ProductViewModel(x.getName(), x.getUnitPrice()))
 			.collect(Collectors.toList()));
 
-		final boolean isFeatured = AuthSession.get().getRoles().hasRole("preferredCustomer");
+		final boolean isFeatured = getAuthSession().getRoles().hasRole(Role.PREFERRED_CUSTOMER.getValue());
 
 		final ListModel<ProductViewModel> model = new ListModel<>(vm.getProducts());
 		add(new ListView<>("products", model) {
@@ -45,5 +54,9 @@ public class HomePage extends WebPage {
 				item.add(new Label("summaryText", item.getModelObject().getSummaryText()));
 			}
 		});
+	}
+
+	protected AuthenticatedWebSession getAuthSession() {
+		return AuthSession.get();
 	}
 }
