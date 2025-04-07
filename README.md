@@ -7,6 +7,11 @@ Javaで書いた『DIの原理・原則とパターン』サンプルプログ�
 
 https://wicket.apache.org
 
+# 動作条件
+
+- JDK 17 以上 (Apache Wicketによる制約)
+- Apache Maven 3
+
 # 第1章 依存注入(Dependency Injection)の役割
 
 ```shell
