@@ -8,6 +8,8 @@ public class Product {
     private Double unitPrice;
     private Boolean isFeatured;
 
+    public Product() {}
+
     public Product(String name, Double unitPrice, Boolean isFeatured) {
         this.name = name;
         this.unitPrice = unitPrice;
