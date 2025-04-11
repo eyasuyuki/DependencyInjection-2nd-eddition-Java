@@ -6,8 +6,8 @@ import java.util.Objects;
  * リスト 3.6
  */
 public class DiscountedProduct {
-    private String name;
-    private double unitPrice;
+    private final String name;
+    private final double unitPrice;
 
     public DiscountedProduct(String name, double unitPrice) {
         this.name = name;
@@ -28,8 +28,7 @@ public class DiscountedProduct {
     }
     @Override
     public boolean equals(Object obj) {
-    if (obj instanceof DiscountedProduct) {
-        DiscountedProduct o =  (DiscountedProduct) obj;
+    if (obj instanceof DiscountedProduct o) {
         return Objects.equals(name, o.name)
             && Objects.equals(unitPrice, o.unitPrice);
     }

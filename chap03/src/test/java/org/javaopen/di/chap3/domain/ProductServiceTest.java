@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Function;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -45,15 +44,11 @@ public class ProductServiceTest {
     public void testGetFeaturedProductsWillReturnCorrectProductsForNonPreferredUser() {
         IUserContext user = new StubUserContext();
 
-        List<DiscountedProduct> expectedProducts = Arrays.asList(new DiscountedProduct[]{
-            new DiscountedProduct("Olives", 24.5),
-            new DiscountedProduct("Mushrooms", 14.2),
-        });
+        List<DiscountedProduct> expectedProducts = Arrays.asList(new DiscountedProduct("Olives", 24.5),
+                new DiscountedProduct("Mushrooms", 14.2));
 
-        List<Product> featuredProducts = Arrays.asList(new Product[]{
-                new Product("Olives", 24.5, false),
-                new Product("Mushrooms", 14.2, false),
-        });
+        List<Product> featuredProducts = Arrays.asList(new Product("Olives", 24.5, false),
+                new Product("Mushrooms", 14.2, false));
 
         IProductRepository repository = new StubProductRepository(featuredProducts);
 
@@ -71,15 +66,11 @@ public class ProductServiceTest {
     public void testGetFeaturedProductsWillReturnCorrectProductsForPreferredUser() {
         IUserContext user = new StubUserContext(new Role[]{Role.PREFERRED_CUSTOMER});
 
-        List<DiscountedProduct> expectedProducts = Arrays.asList(new DiscountedProduct[]{
-                new DiscountedProduct("Olives", 95.0),
-                new DiscountedProduct("Mushrooms", 47.5),
-        });
+        List<DiscountedProduct> expectedProducts = Arrays.asList(new DiscountedProduct("Olives", 95.0),
+                new DiscountedProduct("Mushrooms", 47.5));
 
-        List<Product> featuredProducts = Arrays.asList(new Product[]{
-                new Product("Olives", 100.0, false),
-                new Product("Mushrooms", 50.0, false),
-        });
+        List<Product> featuredProducts = Arrays.asList(new Product("Olives", 100.0, false),
+                new Product("Mushrooms", 50.0, false));
 
         IProductRepository repository = new StubProductRepository(featuredProducts);
 
@@ -94,7 +85,7 @@ public class ProductServiceTest {
      * リポジトリのテスト用スタブ
      */
     static class StubProductRepository implements IProductRepository {
-        private List<Product> products;
+        private final List<Product> products;
 
         public StubProductRepository() {
             products = new ArrayList<>();

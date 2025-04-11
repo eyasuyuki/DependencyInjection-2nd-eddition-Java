@@ -55,8 +55,7 @@ public class Product {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof Product) {
-            Product o = (Product) obj;
+        if (obj instanceof Product o) {
             return Objects.equals(name, o.name)
                 && Objects.equals(unitPrice, o.unitPrice)
                 && Objects.equals(isFeatured, o.isFeatured);
