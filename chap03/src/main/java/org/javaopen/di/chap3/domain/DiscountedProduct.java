@@ -10,6 +10,9 @@ public class DiscountedProduct {
     private final double unitPrice;
 
     public DiscountedProduct(String name, double unitPrice) {
+        if (name == null) {
+            throw new IllegalArgumentException("Name cannot be null");
+        }
         this.name = name;
         this.unitPrice = unitPrice;
     }
