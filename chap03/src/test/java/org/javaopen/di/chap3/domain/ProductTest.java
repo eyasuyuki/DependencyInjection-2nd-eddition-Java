@@ -8,6 +8,10 @@ import java.util.Arrays;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductTest {
+
+    /**
+     * setterが機能しているかどうかのテスト
+     */
     @Test
     public void testProductContainsWellBehavedWritableProperties() {
         String expectName = "Anything";
@@ -23,6 +27,9 @@ public class ProductTest {
                 .containsExactly(expectName, expectPrice);
     }
 
+    /**
+     * 通常ユーザーは値引きしないテスト
+     */
     @Test
     public void testDiscountWhenUserIsNotPreferredUser() {
         double productUnitPrice = 12.3;
@@ -35,6 +42,9 @@ public class ProductTest {
         assertThat(result.getUnitPrice()).isEqualTo(expectedUnitPrice);
     }
 
+    /**
+     * 優待ユーザーの値引きテスト
+     */
     @Test
     public void testDiscountWhenUserIsPreferredUser() {
         IUserContext preferredCustomer = new StubUserContext(new Role[]{Role.PREFERRED_CUSTOMER});

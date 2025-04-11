@@ -1,5 +1,7 @@
 package org.javaopen.di.chap3.domain;
 
+import java.util.Objects;
+
 /**
  * リスト 3.8
  */
@@ -44,5 +46,21 @@ public class Product {
 
     public void setFeatured(Boolean featured) {
         isFeatured = featured;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, unitPrice, isFeatured);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Product) {
+            Product o = (Product) obj;
+            return Objects.equals(name, o.name)
+                && Objects.equals(unitPrice, o.unitPrice)
+                && Objects.equals(isFeatured, o.isFeatured);
+        }
+        return false;
     }
 }

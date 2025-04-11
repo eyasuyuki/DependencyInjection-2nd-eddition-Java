@@ -5,6 +5,9 @@ import org.javaopen.di.chap3.domain.Role;
 
 import java.util.Arrays;
 
+/**
+ * ユーザーコンテキストのスタブ
+ */
 public class StubUserContext implements IUserContext {
     private Role[] roles = new Role[0];
 
