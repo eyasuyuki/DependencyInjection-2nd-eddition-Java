@@ -14,17 +14,18 @@ import org.javaopen.di.chap3.ui.model.FeaturedProductsViewModel;
 import org.javaopen.di.chap3.ui.model.ProductViewModel;
 
 import java.io.Serial;
+import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
  * リスト 3.4
  */
-public class HomePage extends WebPage {
+public class HomePage extends WebPage implements Serializable {
 	@Serial
 	private static final long serialVersionUID = 1L;
 
-	private IProductService productService;
+	private transient IProductService productService; // シリアライズさせない
 
 	public HomePage(IProductService productService) {
 		if (productService == null) {
@@ -42,7 +43,7 @@ public class HomePage extends WebPage {
 
 		FeaturedProductsViewModel vm = new FeaturedProductsViewModel(
 			products.stream()
-			.map(x -> new ProductViewModel(x.getName(), x.getUnitPrice()))
+			.map(ProductViewModel::new)
 			.collect(Collectors.toList()));
 
 		final boolean isFeatured = getAuthSession().getRoles().hasRole(Role.PREFERRED_CUSTOMER.getValue());

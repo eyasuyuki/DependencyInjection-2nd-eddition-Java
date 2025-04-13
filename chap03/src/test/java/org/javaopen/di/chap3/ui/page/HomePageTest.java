@@ -51,8 +51,7 @@ public class HomePageTest {
         ListView<?> products = (ListView<?>)wicketTester.getLastRenderedPage().get("products");
         List<?> productList = (List<?>)products.getDefaultModelObject();
         List<ProductViewModel> expected = stubProductService.getFeaturedProducts().stream()
-        .map(x -> new ProductViewModel(x.getName(), x.getUnitPrice()))
-                                .toList();
+            .map(ProductViewModel::new).toList();
         assertThat(productList).isEqualTo(expected);
     }
 
