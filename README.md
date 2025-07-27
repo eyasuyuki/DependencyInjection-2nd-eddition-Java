@@ -83,3 +83,10 @@ mvn jetty:run
 
 ※ 停止は```Ctrl-C```
 
+** C#版との違い
+
+```Currency```クラスは```java.util.Currency```をそのまま使ったため以下は移植しなかった
+
+- ```Currency```クラス
+- ```ICurrencyRepository```インターフェース
+- ```SqlCurrencyRepository```クラス
